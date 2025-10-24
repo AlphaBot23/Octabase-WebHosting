@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>St. Lazarus' Church - Kurukulawa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0b3d91 0%, #0a2540 100%);
+      color: #e1e6f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Parallax background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      filter: brightness(0.4) blur(4px);
+      z-index: -2;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Overlay gradient for depth */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0.07), rgba(0,0,0,0.3));
+      z-index: -1;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #142a4b88;
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4e89aecc;
+      border-radius: 6px;
+      border: 3px solid #142a4b88;
+    }
+
+    /* Header & Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, #ffd700, #ffffff, #ffd700);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shine 3s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes shine {
+      0%, 100% { background-position: 200% center; }
+      50% { background-position: -200% center; }
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: #e1e6f0;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 12px;
+      transition: 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: "";
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #4e89aecc;
+      transition: 0.3s ease;
+      z-index: -1;
+      border-radius: 12px;
+    }
+
+    nav a:hover::before {
+      left: 0;
+    }
+
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #a0c4ffaa;
+    }
+
+    /* Main content */
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    /* Section Glass cards */
+    section {
+      background: rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 30px 30px 40px;
+      margin-bottom: 50px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.15);
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideFadeIn 1s forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.3s; }
+    section:nth-child(3) { animation-delay: 0.5s; }
+    section:nth-child(4) { animation-delay: 0.7s; }
+    section:nth-child(5) { animation-delay: 0.9s; }
+
+    @keyframes slideFadeIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Headings */
+    section h2 {
+      font-size: 2.1rem;
+      margin-bottom: 25px;
+      letter-spacing: 0.03em;
+      color: #fefefe;
+      text-shadow: 0 0 6px #7ec8e3aa;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    ul li::before {
+      content: '✝';
+      position: absolute;
+      left: 0;
+      color: #f0d478;
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+      top: 3px;
+      text-shadow: 0 0 5px #ffd700aa;
+    }
+
+    ul li a {
+      color: #a6d1ff;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    ul li a:hover {
+      color: #ffd700;
+      text-shadow: 0 0 8px #ffd700cc;
+    }
+
+    /* Gallery grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #4e89aeaa;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      filter: drop-shadow(0 0 0.5rem #1e2f55aa);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08) rotate(1deg);
+      box-shadow: 0 0 25px #ffd700ee;
+      filter: drop-shadow(0 0 1rem #ffd700dd);
+    }
+
+    /* Videos */
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+    .videos video {
+      border-radius: 20px;
+      box-shadow: 0 0 25px #4e89aecc;
+      max-width: 320px;
+      width: 100%;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .videos video:hover {
+      box-shadow: 0 0 40px #ffd700dd;
+    }
+
+    /* Schedule table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+    }
+    thead tr {
+      background: linear-gradient(90deg, #3366cc, #1a3d7c);
+      color: #fff;
+    }
+    th, td {
+      padding: 15px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    tbody tr:hover {
+      background: rgba(255, 215, 0, 0.2);
+      color: #fff;
+      font-weight: 600;
+      cursor: default;
+      transition: background 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #a6b4c7;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav {
+        gap: 15px;
+      }
+      section h2 {
+        font-size: 1.8rem;
+      }
+      .videos video {
+        max-width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>St. Lasarus' Church</h1>
+  <nav>
+    <a href="#links">Links</a>
+    <a href="#news">News</a>
+    <a href="#photos">Photos</a>
+    <a href="#podcasts">Podcasts</a>
+    <a href="#schedule">Schedule</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="links" >
+    <h2>Special Links</h2>
+    <ul>
+      <li><a href="https://biblegateway.com" target="_blank" rel="noopener">Bible Gateway</a></li>
+      <li><a href="https://www.catholic.org" target="_blank" rel="noopener">Catholic.org</a></li>
+      <li><a href="https://www.churchservices.tv" target="_blank" rel="noopener">Church Services TV</a></li>
+    </ul>
+  </section>
+
+  <section id="news">
+    <h2>Latest News</h2>
+    <ul>
+      <li>Malfunction</li>
+      <li>Malfunction</li>
+      <li>Malfunction</li>
+      <li>Malfunction</li>
+      <li>Malfunction</li>
+      <li>Malfunction</li>
+    </ul>
+  </section>
+
+  <section id="photos">
+    <h2>Photo Gallery</h2>
+    <div class="gallery">
+      <img src="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png" alt="Church interior" />
+      <img src="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png" alt="Community gathering" />
+      <img src="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png" alt="Outdoor mass" />
+      <img src="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png" alt="Ouor mass" />
+    </div>
+  </section>
+
+  <section id="podcasts">
+    <h2>Podcasts</h2>
+    <div class="videos">
+      <video controls preload="metadata" poster="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png">
+        <source src="Null" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <video controls preload="metadata" poster="https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png">
+        <source src="Null" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>Mass Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Sunday</td><td>8:15 AM</td><td>Kurukulawa Church</td></tr>
+        <tr><td>Tuesday</td><td>7:00 PM</td><td>Kurukulawa Chrch</td></tr>
+        <tr><td>Wednesday</td><td>6:00 AM</td><td>Kurukulawa Church</td></tr>
+        <tr><td>Friday</td><td>7:00 PM</td><td>Kurukulawa Church</td></tr>
+        <tr><td>Saturday</td><td>7:00 PM</td><td>Kurukulawa Church</td></tr>
+        <tr><td>Saturday</td><td>6:00 AM</td><td>Kurukulawa Church</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 St. Lazarus' Church. All rights reserved.
+</footer>
+
+<script>
+  // Parallax scroll effect for background
+  window.addEventListener('scroll', () => {
+    const yOffset = window.pageYOffset;
+    document.body.style.setProperty('--scroll-y', `${yOffset * 0.3}px`);
+    document.body.style.backgroundPosition = `center calc(50% + ${yOffset * 0.3}px)`;
+  });
+</script>
+
+</body>
+</html>
